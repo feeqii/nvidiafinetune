@@ -1,0 +1,27 @@
+# Ozzie Arabic ASR Baseline Evaluation
+# Compatible with NeMo 1.12.0 checkpoints (trainable_v3.0)
+
+# Core ML framework
+torch>=2.0.0,<2.4.0
+
+# NVIDIA NeMo ASR toolkit
+nemo_toolkit[asr]>=1.20.0,<2.0.0
+
+# Audio processing
+pydub>=0.25.1
+
+# ASR evaluation metrics
+jiwer>=3.0.0
+
+# Data handling
+pandas>=2.0.0
+
+# Configuration
+pyyaml>=6.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# For NGC CLI integration (optional, can also install via pip install ngc-cli)
+# ngc-cli  # Uncomment if you want pip-managed NGC CLI
+

@@ -1,0 +1,40 @@
+{
+  "surahs": {
+    "fatiha": {
+      "name": "Al-Fatiha",
+      "name_ar": "الفاتحة",
+      "surah_number": 1,
+      "ayat_count": 7,
+      "includes_bismillah": true,
+      "text_normalized": "بسم الله الرحمن الرحيم الحمد لله رب العالمين الرحمن الرحيم مالك يوم الدين اياك نعبد واياك نستعين اهدنا الصراط المستقيم صراط الذين انعمت عليهم غير المغضوب عليهم ولا الضالين",
+      "ayat": [
+        "بسم الله الرحمن الرحيم",
+        "الحمد لله رب العالمين",
+        "الرحمن الرحيم",
+        "مالك يوم الدين",
+        "اياك نعبد واياك نستعين",
+        "اهدنا الصراط المستقيم",
+        "صراط الذين انعمت عليهم غير المغضوب عليهم ولا الضالين"
+      ]
+    },
+    "ikhlas": {
+      "name": "Al-Ikhlas",
+      "name_ar": "الاخلاص",
+      "surah_number": 112,
+      "ayat_count": 4,
+      "includes_bismillah": false,
+      "text_normalized": "قل هو الله احد الله الصمد لم يلد ولم يولد ولم يكن له كفوا احد",
+      "ayat": [
+        "قل هو الله احد",
+        "الله الصمد",
+        "لم يلد ولم يولد",
+        "ولم يكن له كفوا احد"
+      ]
+    }
+  },
+  "notes": {
+    "normalization": "All text is pre-normalized: no diacritics (harakat), no tatweel, alef forms unified to ا, ى normalized to ي. Taa marbuta (ة) is NOT converted to ه by default.",
+    "source": "quran.com (verified against standard Uthmani text, diacritics removed)"
+  }
+}
+
