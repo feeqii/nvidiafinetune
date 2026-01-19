@@ -41,3 +41,5 @@ echo "You can now SSH into RunPod and run the pipeline:"
 echo "  ssh -p $RUNPOD_PORT $RUNPOD_USER@$RUNPOD_HOST"
 echo "  cd /workspace && python -m ozzie_asr.run --help"
 
+
+
