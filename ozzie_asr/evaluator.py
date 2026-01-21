@@ -120,6 +120,7 @@ class Evaluator:
         normalize_taa_marbuta: bool = False,
         canonical_config_path: Optional[Path] = None,
         unknown_threshold: float = 0.2,
+        remove_diacritics: bool = True,
     ):
         """Initialize evaluator.
 
@@ -128,20 +129,25 @@ class Evaluator:
             normalize_taa_marbuta: Whether to normalize ة to ه (default: False).
             canonical_config_path: Path to canonical_texts.json.
             unknown_threshold: Minimum similarity to classify as known surah.
+            remove_diacritics: Whether to remove diacritics (default: True).
         """
         self.mode = mode
         self.unknown_threshold = unknown_threshold
+        self.remove_diacritics = remove_diacritics
 
         # Initialize normalizer
         self.normalizer = ArabicNormalizer(
-            normalize_taa_marbuta=normalize_taa_marbuta
+            normalize_taa_marbuta=normalize_taa_marbuta,
+            remove_diacritics=remove_diacritics,
         )
 
         # Load canonical texts
         self.canonical = get_canonical_texts(canonical_config_path)
         self._canonical_normalized = {
             surah_id: self.normalizer(text)
-            for surah_id, text in self.canonical.get_all_texts().items()
+            for surah_id, text in self.canonical.get_all_texts(
+                with_diacritics=not remove_diacritics
+            ).items()
         }
 
     def classify_surah(self, text: str) -> ClassificationResult:
@@ -335,6 +341,7 @@ class Evaluator:
         return {
             "mode": self.mode.value,
             "normalize_taa_marbuta": self.normalizer.normalize_taa_marbuta,
+            "remove_diacritics": self.remove_diacritics,
             "unknown_threshold": self.unknown_threshold,
             "normalizer_config": self.normalizer.get_config(),
         }

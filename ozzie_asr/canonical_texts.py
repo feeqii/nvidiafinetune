@@ -45,14 +45,16 @@ class CanonicalTexts:
         """Get list of available surah IDs (e.g., ['fatiha', 'ikhlas'])."""
         return list(self.surahs.keys())
 
-    def get_text(self, surah_id: str) -> str:
-        """Get the full normalized text for a surah.
+    def get_text(self, surah_id: str, with_diacritics: bool = False) -> str:
+        """Get the full text for a surah.
 
         Args:
             surah_id: Surah identifier ('fatiha' or 'ikhlas')
+            with_diacritics: If True, return text_with_diacritics if available,
+                           otherwise fall back to text_normalized.
 
         Returns:
-            Full normalized text as a single string.
+            Full text as a single string.
 
         Raises:
             KeyError: If surah_id is not found.
@@ -61,7 +63,13 @@ class CanonicalTexts:
             raise KeyError(
                 f"Unknown surah: '{surah_id}'. Available: {self.get_surah_ids()}"
             )
-        return self.surahs[surah_id]["text_normalized"]
+        
+        surah_data = self.surahs[surah_id]
+        
+        if with_diacritics and "text_with_diacritics" in surah_data:
+            return surah_data["text_with_diacritics"]
+        
+        return surah_data["text_normalized"]
 
     def get_ayat(self, surah_id: str) -> List[str]:
         """Get individual ayat (verses) for a surah.
@@ -82,9 +90,16 @@ class CanonicalTexts:
         """Get the English name of a surah."""
         return self.surahs[surah_id]["name"]
 
-    def get_all_texts(self) -> Dict[str, str]:
-        """Get a dict mapping surah_id -> normalized text for all surahs."""
-        return {sid: self.get_text(sid) for sid in self.get_surah_ids()}
+    def get_all_texts(self, with_diacritics: bool = False) -> Dict[str, str]:
+        """Get a dict mapping surah_id -> text for all surahs.
+        
+        Args:
+            with_diacritics: If True, return texts with diacritics if available.
+        
+        Returns:
+            Dict of surah_id -> text.
+        """
+        return {sid: self.get_text(sid, with_diacritics=with_diacritics) for sid in self.get_surah_ids()}
 
 
 # Module-level singleton for convenience

@@ -291,6 +291,7 @@ def cmd_eval(args: argparse.Namespace) -> int:
         evaluator = Evaluator(
             mode=mode,
             normalize_taa_marbuta=args.normalize_taa_marbuta,
+            remove_diacritics=not args.preserve_diacritics,
         )
 
         # Prepare evaluation input
@@ -536,6 +537,11 @@ Examples:
         "--cpu",
         action="store_true",
         help="Use CPU instead of GPU",
+    )
+    eval_parser.add_argument(
+        "--preserve-diacritics",
+        action="store_true",
+        help="Preserve diacritics in evaluation (default: remove diacritics)",
     )
 
     args = parser.parse_args()
